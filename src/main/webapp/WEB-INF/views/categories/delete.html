@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Are you sure to delete this category?</h2>
+<input type="button" value="Back home" onclick="window.location.href='/category-list' " />
+<form method="post" th:object="${categories}" th:action="@{/category-delete}">
+    <input type="hidden" th:field="*{categoryId}"/>
+    <table>
+        <tr>
+            <td>Category name:</td>
+            <td th:text="${categories.getCategoryName()}"></td>
+        </tr>
+        <tr>
+            <td>Category name:</td>
+            <td th:text="${categories.getDescription()}"></td>
+        </tr>
+        <tr>
+            <td><button type="submit">Yes</button> </td>
+            <td><input type="button" value="No" onclick="window.location.href='/category-list' " /></td>
+        </tr>
+    </table>
+
+</form>
+</body>
+</html>

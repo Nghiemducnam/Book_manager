@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="Create new category" onclick="window.location.href='/category-create' " />
+<table  border="1">
+    <tr>
+        <td><b>Category name</b></td>
+        <td><b>Description</b></td>
+        <td><b>Edit</b></td>
+        <td><b>Delete</b></td>
+    </tr>
+        <th:block th:each="i : ${categories}">
+    <tr>
+            <td th:text="${i.getCategoryName()}"></td>
+            <td th:text="${i.getDescription()}"></td>
+            <td><a th:href="@{/category-edit/__${i.getCategoryId()}__}">Edit</a></td>
+            <td><a th:href="@{/category-delete/__${i.getCategoryId()}__}">Delete</a></td>
+    </tr>
+        </th:block>
+    <div>
+        <a th:href="@{'/category-list'(page=${categories.number - 1})}" th:if="${categories.hasPrevious()}">Previous</a>
+        <span th:text="${categories.number + 1}"></span>/<span th:text="${categories.totalPages}"></span>
+        <a th:href="@{'/category-list'(page=${categories.number + 1})}" th:if="${categories.hasNext()}">Next</a>
+    </div>
+</table>
+<input type="button" value="Return home page" onclick="window.location.href='/' " />
+</body>
+</html>

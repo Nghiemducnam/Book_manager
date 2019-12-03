@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Edit this Category</h1>
+<input type="button" value="Back home" onclick="window.location.href='/category-list' " />
+<b><p th:text="${message}"></p></b>
+<form method="post" th:action="@{/category-edit}" th:object="${categories}">
+    <input type="hidden" th:field="*{categoryId}"/>
+    <table>
+        <tr>
+            <td>Category name:</td>
+            <td><input type="text" th:field="*{categoryName}"/></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Edit</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

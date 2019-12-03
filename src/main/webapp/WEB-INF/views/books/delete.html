@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="back book list" onclick="window.location.href='/book-list' " />
+<b><h1>Are you sure?</h1></b>
+<form th:action="@{/book-delete}" method="post" th:object="${book}">
+    <input th:type="hidden" name="id" th:field="*{bookId}"/>
+    <table>
+        <tr>
+            <td><b>Book name:</b></td>
+            <td th:text="${book.getBookName()}"></td>
+        </tr>
+        <tr>
+            <td><b>Date of purchase</b></td>
+            <td th:text="${book.getDateOfPurchase()}"></td>
+        </tr>
+        <tr>
+            <td><b>Price</b></td>
+            <td th:text="${book.getPrice()}"></td>
+        </tr>
+        <tr>
+            <td><b>Category</b></td>
+            <td th:text="${book.getCategory().categoryName}"></td>
+        </tr>
+        <tr>
+            <td><button type="submit">Yes</button> </td>
+            <td><input type="button" value="No" onclick="window.location.href='/book-list' " /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

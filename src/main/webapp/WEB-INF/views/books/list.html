@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>phone</title>
+</head>
+<body>
+<h1>Book list</h1>
+<input type="button" value="Create new category" onclick="window.location.href='/book-create' " />
+<form>
+    <b> Search by name:</b>
+    <input name="s" type="text"/>
+    <input type="submit" value="Search"/>
+</form>
+<br/>
+
+<!--<form th:action="@{/searchByCategory}" onchange="this.submit()">-->
+<!--    <a>Search by category</a>-->
+<!--    <select name="search">-->
+<!--        <option value=-1></option>-->
+<!--        <option th:each="category :${categories}"-->
+<!--                th:text="${category.category_name}"-->
+<!--                th:value="${category.category_Id}"-->
+<!--                th:selected="(${category.getCategory_Id()}==${search})"></option>-->
+<!--    </select>-->
+
+<!--</form>-->
+
+<table border="1">
+    <tr>
+        <td><b>Book Name</b></td>
+        <td><b>Date of purchase</b></td>
+        <td><b>Book price</b></td>
+        <td><b>Author</b></td>
+        <td><b>Category</b></td>
+        <td><b>Edit</b></td>
+        <td><b>Delete</b></td>
+        <td><b>Detail</b></td>
+    </tr>
+    <th:block th:each="book:${books}">
+        <tr>
+            <td th:text="${book.getBookName()}"></td>
+            <td th:text="${book.getDateOfPurchase()}"></td>
+            <td th:text="${book.getPrice()}"></td>
+            <td th:text="${book.getAuthor()}"></td>
+            <td th:text="${book.getCategory().categoryName}"></td>
+            <td><a th:href="@{/book-edit/__${book.getBookId()}__}">Edit</a></td>
+            <td><a th:href="@{/book-delete/__${book.getBookId()}__}">Delete</a></td>
+            <td><a th:href="@{/book-detail/__${book.getBookId()}__}">Detail</a></td>
+        </tr>
+    </th:block>
+    <div>
+        <a th:href="@{'/book-list'(page=${books.number - 1})}" th:if="${books.hasPrevious()}">Previous</a>
+        <span th:text="${books.number + 1}"></span>/<span th:text="${books.totalPages}"></span>
+        <a th:href="@{'/book-list'(page=${books.number + 1})}" th:if="${books.hasNext()}">Next</a>
+    </div>
+</table>
+<input type="button" value="Return home page" onclick="window.location.href='/' " />
+</body>
+</html>

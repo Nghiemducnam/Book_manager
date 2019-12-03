@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book detail</title>
+</head>
+<body>
+<input type="button" value="back book list" onclick="window.location.href='/book-list' " />
+<h1>Product detail</h1>
+<form th:object="${book}">
+
+    <input th:type="hidden" name="id" th:field="*{bookId}"/>
+    <table>
+        <tr>
+            <td><b>Book name:</b></td>
+            <td th:text="${book.getBookName()}"></td>
+        </tr>
+        <tr>
+            <td><b>Date of purchase:</b></td>
+            <td th:text="${book.getDateOfPurchase()}"></td>
+        </tr>
+        <tr>
+            <td><b>Price:</b></td>
+            <td th:text="${book.getPrice()}"></td>
+        </tr>
+        <tr>
+            <td><b>Category:</b></td>
+            <td th:text="${book.getCategory().categoryName}"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
