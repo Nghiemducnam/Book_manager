@@ -13,14 +13,22 @@
         <tr>
             <td>Book name</td>
             <td><input type="text" th:field="*{bookName}"/></td>
+            <td th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}">Name error</td>
         </tr>
         <tr>
             <td>Date of purchase</td>
-            <td><input type="text" th:field="*{dateOfPurchase}"/></td>
+            <td><input type="date" th:field="*{dateOfPurchase}"/></td>
+            <td th:if="${#fields.hasErrors('dateOfPurchase')}" th:errors="*{dateOfPurchase}">Name error</td>
         </tr>
         <tr>
             <td>Book price</td>
             <td><input type="text" th:field="*{price}"/></td>
+            <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Name error</td>
+        </tr>
+        <tr>
+            <td>Author</td>
+            <td><input type="text" th:field="*{author}"/></td>
+            <td th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Name error</td>
         </tr>
         <tr>
             <td>Category</td>

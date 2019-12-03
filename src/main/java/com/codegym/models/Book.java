@@ -1,6 +1,7 @@
 package com.codegym.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Books")
@@ -8,10 +9,14 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long bookId;
+
     private String bookName;
+
     private String dateOfPurchase;
+
     private String author;
-    private double price;
+
+    private Long price;
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
@@ -20,13 +25,20 @@ public class Book {
     public Book() {
     }
 
-    public Book(String book_name, String dateOfPurchase, String author, double price, Category category) {
-        this.bookName = book_name;
+    public Book(String bookName, String dateOfPurchase, String author, Long price, Category category) {
+        this.bookName = bookName;
         this.dateOfPurchase = dateOfPurchase;
         this.author = author;
         this.price = price;
         this.category = category;
     }
+    //    public Book(@NotEmpty String bookName, @NotEmpty String dateOfPurchase, @NotEmpty String author, @NotEmpty Long price, @NotEmpty Category category) {
+//        this.bookName = bookName;
+//        this.dateOfPurchase = dateOfPurchase;
+//        this.author = author;
+//        this.price = price;
+//        this.category = category;
+//    }
 
     public Long getBookId() {
         return bookId;
@@ -60,11 +72,11 @@ public class Book {
         this.author = author;
     }
 
-    public double getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 

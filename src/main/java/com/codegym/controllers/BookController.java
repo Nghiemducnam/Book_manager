@@ -9,9 +9,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -65,6 +68,7 @@ public class BookController {
         return modelAndView;
     }
 
+
     @GetMapping("/book-edit/{id}")
     public ModelAndView editFOrm(@PathVariable Long id) {
         Book book = bookService.findById(id);
@@ -104,7 +108,7 @@ public class BookController {
         return modelAndView;
     }
 
-    @GetMapping("/book-detail")
+    @GetMapping("/book-detail/{id}")
     public ModelAndView checkDetail(@PathVariable Long id){
         Book book = bookService.findById(id);
         if(book!=null){
