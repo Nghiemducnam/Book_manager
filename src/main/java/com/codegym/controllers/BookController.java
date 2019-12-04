@@ -11,10 +11,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -33,7 +33,12 @@ public class BookController {
 //        return modelAndView;
 //    }
 
-    @GetMapping("/book-list")
+@PostMapping("/login")
+ModelAndView doLogin(){
+    ModelAndView modelAndView = new ModelAndView("/dispatcher/home");
+    return  modelAndView;
+}
+    @GetMapping("/user/book-list")
     public ModelAndView listPhones(@RequestParam("s") Optional<String> s, @PageableDefault(size = 5, sort = "price") Pageable pageable){
         Page<Book> books;
         if(s.isPresent()){
@@ -60,12 +65,18 @@ public class BookController {
     }
 
     @PostMapping("/book-create")
-    public ModelAndView doCreate(@ModelAttribute("book") Book book) {
-        bookService.save(book);
-        ModelAndView modelAndView = new ModelAndView("books/create");
-        modelAndView.addObject("book", new Book());
-        modelAndView.addObject("message", "you have just created a new book");
-        return modelAndView;
+    public ModelAndView doCreate(@Validated @ModelAttribute("book") Book book, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors()) {
+            ModelAndView modelAndView = new ModelAndView("books/create");
+            modelAndView.addObject("message",bindingResult.getAllErrors());
+            return modelAndView;
+        } else {
+            bookService.save(book);
+            ModelAndView modelAndView = new ModelAndView("books/create");
+            modelAndView.addObject("book", new Book());
+            modelAndView.addObject("message", "you have just created a new book");
+            return modelAndView;
+        }
     }
 
 

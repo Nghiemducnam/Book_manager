@@ -1,7 +1,9 @@
 package com.codegym.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+
 
 @Entity
 @Table(name = "Books")
@@ -9,13 +11,13 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long bookId;
-
+@NotEmpty
     private String bookName;
-
+@NotEmpty
     private String dateOfPurchase;
-
+@NotEmpty
     private String author;
-
+@Min(0)
     private Long price;
 
     @ManyToOne

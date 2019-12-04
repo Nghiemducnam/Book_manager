@@ -1,7 +1,6 @@
 package com.codegym.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -10,9 +9,9 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long categoryId;
-    @NotEmpty
+
     private String categoryName;
-    @NotEmpty
+
     private String description;
 
     @OneToMany(targetEntity = Book.class)
